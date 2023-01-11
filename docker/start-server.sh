@@ -17,6 +17,6 @@ echo '>>> super user created'
 
 echo '>>> Starting server and telegramm-bot'
 
-python app/manage.py runserver 0.0.0.0:8000
+python app/manage.py runserver 0.0.0.0:8000 & python app/manage.py runbot
 
 
