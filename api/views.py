@@ -1,7 +1,7 @@
 from django.utils import timezone
 from asgiref.sync import async_to_sync
 from django.contrib.auth import login
-from rest_framework.decorators import action, permission_classes
+from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -42,17 +42,18 @@ class LoginView(APIView):
         return Response(data={"success": "u in system :)"}, status=HTTP_200_OK)
 
 
-@permission_classes([IsAuthenticated])
 class EchoTelegram(ListAPIView, ViewSet):
     serializer_class = EchoSerializer
+    permission_classes = [IsAuthenticated]
     queryset = Message.objects.all()
 
     @action(methods=["get"], detail=False, url_path="get_token", url_name="get_token")
     def get_token(self, request):
         return Response({"token": request.user.token.token}, status=HTTP_200_OK)
 
-    def post(self, request):
-        serializer = self.serializer_class(data=request.POST)
+    @action(methods=["post"], detail=False, url_path="", url_name="")
+    def send_message(self, request):
+        serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         async_to_sync(send_message)(
             self.get_user_id(),
