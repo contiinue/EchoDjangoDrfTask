@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    env_file:
+      - .env
+    networks:
+      - web_network
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata/data:/var/lib/postgresql/data
+    restart: always
+
+  web:
+    container_name: web
+    build:
+      dockerfile: docker/DockerFile
+    env_file:
+      - .env
+    ports:
+      - '8000:8000'
+    networks:
+      - web_network
+    depends_on:
+      - db
+    restart: always
+
+networks:
+  web_network:
+    driver: bridge

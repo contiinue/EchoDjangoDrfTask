@@ -1,0 +1,6 @@
+Тестовое задание - https://docviewer.yandex.com/view/0/?page=1&*=0TOrSeE7j%2BCWfLhuXm50Om0ZZL17InVybCI6InlhLWRpc2stcHVibGljOi8vK3RMbjB1c3hKYnZlVVZOVG5kK1JMblhTdERBdUdVaDB0NlRSNXR1QlhuZGNFZlJiKzNYN3JqRU9EaktsMkNNNHEvSjZicG1SeU9Kb25UM1ZvWG5EYWc9PSIsInRpdGxlIjoidGhlX2ZhY3RvcnlfYm90X3Rhc2sucGRmIiwibm9pZnJhbWUiOmZhbHNlLCJ1aWQiOiIwIiwidHMiOjE2NzMzNTkyMDY2MDUsInl1IjoiOTg3ODYzMjkyMTY1MzQyMjkwNiJ9
+___
+
+
+# Установка
+
