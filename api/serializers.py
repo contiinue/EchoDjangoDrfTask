@@ -15,11 +15,11 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
+    username = serializers.CharField(max_length=150)
     password = serializers.CharField(max_length=128)
 
     def validate(self, attrs):
-        username = attrs.get("email")
+        username = attrs.get("username")
         password = attrs.get("password")
 
         if username and password:

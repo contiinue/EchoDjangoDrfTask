@@ -55,6 +55,7 @@ def change_token(token: Token, user_id: int) -> None:
 async def process_token(message: types.Message, state: FSMContext):
     token = await sync_to_async(get_token_model)(message.text)
     if token is None:
+        await state.finish()
         return await message.reply(
             "Токен введен не правильно или срок действия истек(30дн)"
         )

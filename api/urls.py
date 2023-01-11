@@ -9,5 +9,4 @@ router.register("echo", EchoTelegram, basename="echo")
 urlpatterns = [
     path("", include(router.urls)),
     path("login/", LoginView.as_view()),
-    # path('echo/', EchoTelegram.as_view())
 ]
