@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import User
+from .models import User, Message
 from django.utils.translation import gettext_lazy as _
 
 
@@ -37,3 +37,9 @@ class LoginSerializer(serializers.Serializer):
 
         attrs["user"] = user
         return attrs
+
+
+class EchoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = ("message",)
