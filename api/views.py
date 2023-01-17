@@ -2,6 +2,7 @@ from django.utils import timezone
 from asgiref.sync import async_to_sync
 from django.contrib.auth import login
 from drf_yasg.utils import swagger_auto_schema
+from rest_framework.authentication import BasicAuthentication
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
@@ -13,6 +14,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView
 
 from echo.settings import TOKEN_LIFE_DAYS
 from bot.main import send_message
+from .auth_classes import SessionCsrfExemptAuthentication
 from .serializers import RegistrationSerializer, LoginSerializer, EchoSerializer
 from .models import Message
 from .utils import get_new_token
@@ -29,12 +31,13 @@ class RegistrationView(CreateAPIView, ViewSet):
         login(self.request, user)
 
 
-class LoginView(APIView):
+class LoginView(ViewSet):
     serializer_class = LoginSerializer
+    authentication_classes = (SessionCsrfExemptAuthentication, BasicAuthentication)
 
     @swagger_auto_schema(method="post", request_body=LoginSerializer)
-    @action(methods=["post"], detail=False, url_path="", url_name="")
-    def post(self, request):
+    @action(methods=["post"], detail=False, url_path="")
+    def login(self, request):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         login(request, serializer.validated_data["user"])
