@@ -22,6 +22,7 @@ from .utils import get_new_token
 
 class RegistrationView(CreateAPIView, ViewSet):
     serializer_class = RegistrationSerializer
+    authentication_classes = (SessionCsrfExemptAuthentication, BasicAuthentication)
 
     def perform_create(self, serializer):
         """After registration, login() user to site"""
