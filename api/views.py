@@ -47,6 +47,7 @@ class LoginView(ViewSet):
 class EchoTelegram(ListAPIView, ViewSet):
     serializer_class = EchoSerializer
     permission_classes = [IsAuthenticated]
+    authentication_classes = (SessionCsrfExemptAuthentication, BasicAuthentication)
     queryset = Message.objects.all()
 
     @action(methods=["get"], detail=False, url_path="get_token", url_name="get_token")
